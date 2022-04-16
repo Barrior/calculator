@@ -1,0 +1,58 @@
+@import '_variables';
+
+@mixin full-position($position: absolute) {
+  position: $position;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+// 垂直水平居中
+@mixin flex-center-vh {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-ellipsis-multiple($num) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $num;
+  word-break: break-all;
+  overflow: hidden;
+}
+
+@mixin scroll-bar($color: #c1c1c1, $width: 9) {
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: $color;
+  }
+}
+
+@mixin screen-xs {
+  @media all and (max-width: $screen-xs) {
+    @content;
+  }
+}
+
+@mixin screen-sm {
+  @media all and (max-width: $screen-sm) {
+    @content;
+  }
+}
+
+@mixin screen-md {
+  @media all and (max-width: $screen-md) {
+    @content;
+  }
+}

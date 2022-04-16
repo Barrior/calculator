@@ -1,0 +1,29 @@
+// font family
+$site-font-family: 'PingFang SC', 'Helvetica Neue', 'Helvetica',
+  'Microsoft JhengHei', 'Microsoft YaHei', 'Arial', 'sans-serif';
+$site-font-family-code: Menlo, Monaco, Monospace, Consolas;
+
+// colors
+$site-color-text: #333;
+$site-color-bg: #fff;
+$site-color-primary: #3c8dbc;
+$site-color-primary-hover: #367fa9;
+
+// components size
+$site-header-height: 50px;
+$site-footer-height: 50px;
+$site-menu-width: 230px;
+$site-menu-width-collapsed: 50px;
+$site-input-radius: 3px;
+
+// screen size
+$screen-xs: 415px; // vertical iPhone 6 plus
+$screen-sm: 768px; // vertical iPad
+$screen-md: 1025px; // horizontal iPad
+$screen-lg: 1367px;
+$screen-xl: 1681px;
+$screen-xxl: 1921px;
+
+// layer z-index
+$site-header-zIndex: 900;
+$site-menu-zIndex: 500;
