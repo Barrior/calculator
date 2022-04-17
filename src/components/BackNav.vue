@@ -13,7 +13,11 @@ const router = useRouter()
 const route = useRoute()
 
 function goBack() {
-  router.back()
+  if (document.referrer === '') {
+    router.replace('/')
+  } else {
+    router.back()
+  }
 }
 </script>
 
