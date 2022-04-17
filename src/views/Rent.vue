@@ -1,22 +1,31 @@
 <template>
-  <div class="about">
+  <div class="rent-page">
     <div class="container">
-      <div class="section">
-        <div>租金（P）</div>
-        <input type="number" id="p" /> 元
+      <div class="section-form">
+        <Input
+          type="number"
+          prefix="每月租金（P）"
+          suffix="元"
+          :value="formData.mp"
+        />
+        <Input
+          type="number"
+          prefix="每年涨幅（R）"
+          suffix="%"
+          :value="formData.r"
+        />
+        <Input
+          type="number"
+          prefix="出租年数（N）"
+          suffix="年"
+          :value="formData.n"
+        />
       </div>
-      <div class="section">
-        <div>利率（R）</div>
-        <input type="number" id="r" /> %
+      <div class="section-btn">
+        <Button type="primary" @click="onCalc">计算收益</Button>
       </div>
+
       <div class="section">
-        <div>出租年数（N）</div>
-        <input type="number" id="n" /> 年
-      </div>
-      <div class="section">
-        <button>计算</button>
-      </div>
-      <div>
         总收益：
         <div>xxx</div>
       </div>
@@ -36,6 +45,18 @@
 
 <script lang="ts" setup>
 import BackNav from '@/components/BackNav.vue'
+import Input from '@/components/Input.vue'
+import Button from '@/components/Button.vue'
+import { reactive } from 'vue'
+
+const formData = reactive({
+  mp: 30,
+})
+
+function onCalc() {
+  console.log('formData:', formData)
+  console.log('formData:', formData.mp)
+}
 
 // 租金
 const P = 3000
@@ -59,3 +80,17 @@ for (let i = 1; i <= n; i++) {
 
 console.log('S: ', S)
 </script>
+
+<style scoped lang="scss">
+.rent-page {
+  padding: 20px;
+}
+
+.section-btn {
+  margin: 20px 0;
+
+  :deep(.button) {
+    width: 100%;
+  }
+}
+</style>
