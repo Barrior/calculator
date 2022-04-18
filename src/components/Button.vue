@@ -1,6 +1,6 @@
 <template>
   <button type="button" :class="classNames">
-    <slot></slot>
+    <slot>开始计算</slot>
   </button>
 </template>
 
@@ -13,10 +13,12 @@ const props = defineProps({
     type: String,
     default: 'default',
   },
+  block: Boolean,
 })
 
 const classNames = reactive({
   button: true,
+  'is-block': props.block,
   primary: props.type === 'primary',
 })
 
@@ -52,6 +54,11 @@ function goBack() {
   color: #333;
   border-color: #d9d9d9;
   background: #fff;
+
+  &.is-block {
+    display: block;
+    width: 100%;
+  }
 }
 
 .primary {

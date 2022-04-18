@@ -6,28 +6,31 @@
           type="number"
           prefix="每月租金（P）"
           suffix="元"
-          :value="formData.mp"
+          placeholder="0"
+          v-model:value="formData.mp"
         />
         <Input
           type="number"
           prefix="每年涨幅（R）"
           suffix="%"
-          :value="formData.r"
+          placeholder="0"
+          v-model:value="formData.r"
         />
         <Input
           type="number"
           prefix="出租年数（N）"
           suffix="年"
-          :value="formData.n"
+          placeholder="0"
+          v-model:value="formData.n"
         />
       </div>
       <div class="section-btn">
-        <Button type="primary" @click="onCalc">计算收益</Button>
+        <Button type="primary" @click="onCalc" block />
       </div>
 
       <div class="section">
-        总收益：
-        <div>xxx</div>
+        <div><strong>总收益：</strong>{{ numberWithCommas(total) }}元</div>
+        <div><strong>收益率：</strong></div>
       </div>
 
       <div>
@@ -47,38 +50,38 @@
 import BackNav from '@/components/BackNav.vue'
 import Input from '@/components/Input.vue'
 import Button from '@/components/Button.vue'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 
-const formData = reactive({
-  mp: 30,
-})
+const formData = reactive<Record<string, any>>({})
+const total = ref(0)
+
+const numberWithCommas = (x: number) => {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
 
 function onCalc() {
-  console.log('formData:', formData)
-  console.log('formData:', formData.mp)
+  // 每年租金 = 每月租金 * 12
+  const P = Number(formData.mp) * 12
+
+  // 每年上涨幅度（百分率）
+  const R = Number(formData.r)
+
+  // 出租年数
+  const N = Number(formData.n)
+
+  // 3000 + 3000*1.05 + 3000*1.05*1.05 = 9457.5
+  // 3000 + 3000*1.05 + 3000*1.05*1.05 + 3000*1.05*1.05*1.05 = 12930.375
+  // 公式：S = \sum_{n=1}^{∞} P * (1 + R)^{n-1}
+  // https://www.latexlive.com/#JTVDc3VtXyU3Qm49MSU3RCU1RSU3QiVFMiU4OCU5RSU3RCUyMFAlMjAqJTIwKDElMjArJTIwUiklNUUlN0JuLTElN0Q=
+
+  let S = 0
+
+  for (let i = 1; i <= N; i++) {
+    S += P * Math.pow(1 + R, i - 1)
+  }
+
+  total.value = S
 }
-
-// 租金
-const P = 3000
-
-// 利率
-const R = 0.05
-
-// 年数
-const n = 3
-
-// 3000 + 3000*1.05 + 3000*1.05*1.05 = 9457.5
-// 3000 + 3000*1.05 + 3000*1.05*1.05 + 3000*1.05*1.05*1.05 = 12930.375
-// 公式：S = \sum_{n=1}^{∞} P * (1 + R)^{n-1}
-// https://www.latexlive.com/#JTVDc3VtXyU3Qm49MSU3RCU1RSU3QiVFMiU4OCU5RSU3RCUyMFAlMjAqJTIwKDElMjArJTIwUiklNUUlN0JuLTElN0Q=
-
-let S = 0
-
-for (let i = 1; i <= n; i++) {
-  S += P * Math.pow(1 + R, i - 1)
-}
-
-console.log('S: ', S)
 </script>
 
 <style scoped lang="scss">
@@ -88,9 +91,5 @@ console.log('S: ', S)
 
 .section-btn {
   margin: 20px 0;
-
-  :deep(.button) {
-    width: 100%;
-  }
 }
 </style>
