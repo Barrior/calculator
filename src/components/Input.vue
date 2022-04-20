@@ -31,7 +31,6 @@ defineProps({
 const emit = defineEmits(['update:value'])
 
 function updateValue(value: string) {
-  console.log('value', value)
   emit('update:value', value)
 }
 </script>
@@ -40,17 +39,16 @@ function updateValue(value: string) {
 .input-wrapper {
   display: flex;
   align-items: center;
-  height: 44px;
   border-bottom: 1px solid #ccc;
-  font-size: 16px;
+  font-size: 18px;
   white-space: nowrap;
+  margin-bottom: 10px;
 }
 
 .input-affix-wrapper {
   flex-grow: 1;
   display: flex;
   align-items: center;
-  height: 100%;
 }
 
 .input-prefix,
@@ -62,5 +60,8 @@ function updateValue(value: string) {
   flex-grow: 1;
   border: none;
   text-align: right;
+  font-size: 18px;
+  width: 100px;
+  height: 58px;
 }
 </style>

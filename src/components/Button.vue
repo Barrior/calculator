@@ -47,10 +47,9 @@ function goBack() {
   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   user-select: none;
   touch-action: manipulation;
-  height: 44px;
-  padding: 4px 15px;
-  font-size: 16px;
-  border-radius: 4px;
+  height: 50px;
+  font-size: 18px;
+  border-radius: 6px;
   color: #333;
   border-color: #d9d9d9;
   background: #fff;

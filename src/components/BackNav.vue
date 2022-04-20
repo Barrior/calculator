@@ -25,10 +25,10 @@ function goBack() {
 .back-nav {
   display: flex;
   align-items: center;
-  padding: 0 10px;
-  height: 44px;
+  padding: 0 15px;
+  height: 52px;
   border-bottom: 1px solid #ccc;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 .title {
